@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebApplication4.Models.Category
+<h2>Delete</h2>
+<dl>
+    <dt>Name</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="OK" />
+}
+<a href="/Administrator/Categories">Cancel</a>

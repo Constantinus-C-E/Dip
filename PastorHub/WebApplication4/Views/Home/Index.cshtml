@@ -1,0 +1,38 @@
+﻿@model List<WebApplication4.Models.Post>
+@using WebApplication4.Models
+@{
+    ViewBag.Title = "Home Page";
+}
+
+    <div class="jumbotron mt-5">
+        <div>
+
+        </div>
+        <div class="row">
+            @foreach (Post i in Model)
+            {
+                <div class="card mt-3 m-auto" style="width: 18rem; display: grid;">
+                    @if (i.Files.FirstOrDefault() != null)
+                    {
+                        <img src="~/Files/PostFiles/@i.Files.FirstOrDefault().FileName" class="card-img-top" style="width: 286px;" alt="Alternate Text" />
+                    }
+                <div class="card-body row text-center">
+                    <h5 class="card-title col-12">@i.Title</h5>
+                    <p class="col-12">Autor: <a href="~/Channel/Index/@i.Pastor.Id">@i.Pastor.UserName</a></p>
+                    <p class="col-12">
+                        Category:
+                        @foreach (Category j in i.Categories)
+                        {
+                            string text = j.Name + " ";
+                            @text
+                        }
+
+                    </p>
+                    <p class="col-12">Date: @i.Date.ToLongDateString()</p>
+                    <a href="~/View/Index/@i.Id" class="col-12 btn btn-primary">Watch</a>
+                </div>
+                </div>
+            }
+        </div>       
+    </div>
+

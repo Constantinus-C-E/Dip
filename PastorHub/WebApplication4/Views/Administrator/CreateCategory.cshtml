@@ -1,0 +1,13 @@
+﻿
+
+
+@using (Html.BeginForm("CreateCategory", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="mt-5 mb-5">
+        <label for="TitleInput" style="font-size:20px;">Category name</label>
+        <input id="TitleInput" class="form-control" type="text" name="Name" />
+    </div>
+
+    <input class="btn btn-success" type="submit" value="Create" />
+}
+
