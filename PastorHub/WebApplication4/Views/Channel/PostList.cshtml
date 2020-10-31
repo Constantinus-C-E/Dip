@@ -1,0 +1,22 @@
+﻿
+@model List<WebApplication4.Models.Post>
+@using WebApplication4.Models
+
+
+    <div class="jumbotron mt-5">
+        <h2 class="mb-5">Post manager</h2>
+        <a class="btn btn-success mb-5" href="/Channel/Create">Create new post</a>
+
+        <table class="table">
+            @foreach (Post i in Model)
+            {
+                <tr>
+                    <td>@i.Title</td>
+                    <td><a class="btn btn-primary" href="/Channel/Subscribe/@i.Id">Edit</a></td>
+                    <td><a class="btn btn-danger" href="/Channel/Delete/@i.Id">Delete</a></td>
+                </tr>
+            }
+        </table>
+
+    </div>
+

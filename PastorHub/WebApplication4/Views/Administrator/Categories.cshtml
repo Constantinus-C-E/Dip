@@ -1,0 +1,21 @@
+﻿
+@model List<WebApplication4.Models.Category>
+@using WebApplication4.Models
+
+
+
+    <div class="jumbotron mt-5">
+        <h2 class="mb-5">Category manager</h2>
+        <a class="btn btn-success mb-5" href="/Administrator/CreateCategory">Create new category</a>
+        <table class="table">
+            @foreach (Category i in Model)
+            {
+                <tr>
+                    <td>@i.Name</td>
+                    <td><a class="btn btn-primary" href="/Administrator/EditCategory/@i.Id">Edit</a></td>
+                    <td><a class="btn btn-danger" href="/Administrator/DeleteCategory/@i.Id">Delete</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+
