@@ -1,0 +1,67 @@
+﻿@model WebApplication4.Models.ApplicationUser
+@using Microsoft.AspNet.Identity;
+@using WebApplication4.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron mt-5 ">
+    <div class="row text-center pt-5 pb-5" style="border-bottom: 4px solid black; border-top: 4px solid black;">
+        <img src="~/Files/Avatars/@Model.AvatarImage" class="mb-2 ml-auto mr-auto text-center rounded-circle" height="100" width="100" /><span class="caret"></span>
+
+        <h2 class="col-12 mb-3">@Model.UserName</h2>
+
+        <p class="col-12 mb-4">Subsribers: @Model.Subscribers.Count</p>
+
+        @if (Model.Id != User.Identity.GetUserId())
+        {
+            if (Model.Subscribers.Where(i => i.Id == User.Identity.GetUserId()).Count() <= 0)
+            {
+                <a href="/Channel/Subscribe/@Model.Id" class="col-6 ml-auto mr-auto btn btn-info">Subscribe</a>
+            }
+            else
+            {
+                <a href="/Channel/Unsubscribe/@Model.Id" class="col-6 ml-auto mr-auto btn btn-danger">Unsubscribe</a>
+            }
+        }
+
+        @if (User.IsInRole("pastor"))
+        {
+            <a href="~/Channel/PostList" class="col-6 ml-auto mr-auto btn btn-primary">Post manager</a>
+        }
+    </div>
+
+    <div class=" pt-5 pb-5 row" style="border-bottom: 4px solid black;">
+        @{
+            ApplicationDbContext context = new ApplicationDbContext();
+            string UserId = Model.Id;
+        }
+        @foreach (Post i in context.Posts.Where(j => j.Pastor.Id == UserId).ToList())
+        {
+            <div class="card mt-3 m-auto" style="width: 18rem; display: grid;">
+                @if (i.Files.FirstOrDefault() != null)
+                {
+                    <img src="~/Files/PostFiles/@i.Files.FirstOrDefault().FileName" class="card-img-top" style="width: 286px;" alt="Alternate Text" />
+                }
+            <div class="card-body row text-center">
+                <h5 class="card-title col-12">@i.Title</h5>
+                <p class="col-12">Autor: <a href="~/Channel/Index/@i.Pastor.Id">@i.Pastor.UserName</a></p>
+                <p class="col-12">
+                    Category:
+                    @foreach (Category j in i.Categories)
+                    {
+                        string text = j.Name + " ";
+                        @text
+                    }
+
+                </p>
+                <p class="col-12">Date: @i.Date.ToLongDateString()</p>
+                <a href="~/View/Index/@i.Id" class="col-12 btn btn-primary">Watch</a>
+            </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+

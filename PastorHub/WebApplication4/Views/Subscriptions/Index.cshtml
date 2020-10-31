@@ -1,0 +1,22 @@
+﻿@model WebApplication4.Models.ApplicationUser
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Subscriptions";
+}
+
+<div class="jumbotron">
+    <h2>Subscriptions</h2>
+    <table class="table">
+        @foreach (var i in Model.Subscriptions)
+        {
+        <tr>
+            <td> <img src="~/Files/Avatars/@i.AvatarImage" class="rounded-circle mr-2" height="70" width="70" /><a href="~/Channel/Index/@i.Id">@i.UserName</a></td>
+
+            <td><a class="btn btn-danger" href="/Channel/Subscribe/@i.Id">Unsubscribe</a></td>
+        </tr>
+        }
+    </table>
+
+</div>
+

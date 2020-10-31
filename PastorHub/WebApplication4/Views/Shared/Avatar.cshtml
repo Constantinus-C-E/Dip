@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+@using WebApplication4.Models
+@{
+    ApplicationUser user = new ApplicationUser();
+    ApplicationDbContext context = new ApplicationDbContext();
+    string userId = User.Identity.GetUserId();
+    user = context.Users.Where(i => i.Id == userId).FirstOrDefault();
+}
+
+@if (Request.IsAuthenticated)
+{
+    <li class="text-center navigation-item">
+        <img src="~/Files/Avatars/@user.AvatarImage" class="rounded-circle d-block ml-auto mr-auto" height="70" width="70" />
+        @user.UserName
+    </li>
+
+   
+}
+

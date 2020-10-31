@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNet.Identity;
+
+@if (User.IsInRole("pastor"))
+{
+    <li class="navigation-item">
+        <a class="col-12 btn btn-outline-info nagation-item"  href="~/Channel/Index/@User.Identity.GetUserId()">Pastor page</a>
+    </li>
+}
+
+@if (User.IsInRole("administrator"))
+{
+    <li class="navigation-item">
+        <a class="col-12 btn btn-outline-info nagation-item" href="~/Administrator/Index">Admin page</a>
+    </li>
+}
